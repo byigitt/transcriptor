@@ -19,8 +19,9 @@ I used Google Colab because of my internet speed & free GPU usage. It works flaw
 ### Executing the Program
 - Firstly, create yourself a google colab and change runtime type to make it as a GPU.
 - After that, create a `youtube_urls.txt` - You can find the example in our repo.
-- Creating urls.txt, use `!chmod 755 main.sh` and do `!./main.sh` in notebook to install everything and the program will open itself.
-- After program finishes its job, download the .txt files and you are good to go!
+- After creating `youtube_urls.txt`, use `!git clone https://github.com/byigitt/transcriptor.git` to get the source files.
+- You need to install our dependencies `main.sh` - In order to get it working, you need to do `!chmod 755 main.sh` and do `!./main.sh` in order to install everything.
+- After installing everything, program will open itself and do its job, you can download the .txt files and you are good to go!
 - Do not forget to open the tab while it does it job, otherwise your files in colab will be deleted!
 
 ## For Issues and Questions
