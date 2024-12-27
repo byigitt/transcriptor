@@ -1,28 +1,107 @@
 # Transcriptor
-This python project lets you create multiple transcripts with youtube links on Google Colab with Whisper AI.
 
-## Questions
-### Why Google Colab?
-I used Google Colab because of my internet speed & free GPU usage. It works flawlessly in Turkish language (which I used this to get the transcripts on Google Oyun ve Uygulama Akademisi education videos).
+This Python project lets you create multiple transcripts from YouTube videos using Whisper AI. Originally designed for Google Colab, it now works both locally and on Colab with GPU acceleration.
 
 ## Features
-- Downloads multiple links on the `youtube_urls.txt` file.
-- Creates transcripts for every mp3 file it downloaded.
-- Automatically deletes mp3 files after creating its transcript.
-- Uses `youtube-dl` as in nightly mode to remove some bugs from the new latest version.
 
-### Dependencies
-- Python 3.x (which Google Colab has)
+- Downloads and processes multiple YouTube videos from `youtube_urls.txt`
+- Creates accurate transcripts using OpenAI's Whisper AI model
+- Automatically manages audio files (downloads and cleanup)
+- Organized output structure with all transcripts in a dedicated directory
+- Comprehensive error handling and logging
+- GPU acceleration support (both local and Colab)
+- Uses `youtube-dl` in nightly mode for better compatibility
+
+## Project Structure
+
+```
+transcriptor/
+├── models/          # Stores Whisper AI models
+├── transcripts/     # Stores generated transcripts
+├── config.py        # Configuration settings
+├── main.py         # Main transcription logic
+├── download.py     # Model download script
+└── youtube_urls.txt # Input YouTube URLs
+```
+
+## Dependencies
+
+- Python 3.x
 - whisper
 - torch
+- youtube-dl (included)
 
-### Executing the Program
-- Firstly, create yourself a google colab and change runtime type to make it as a GPU.
-- After that, create a `youtube_urls.txt` - You can find the example in our repo.
-- After creating `youtube_urls.txt`, use `!git clone https://github.com/byigitt/transcriptor.git` to get the source files.
-- You need to install our dependencies `main.sh` - In order to get it working, you need to do `!chmod 755 main.sh` and do `!./main.sh` in order to install everything.
-- After installing everything, program will open itself and do its job, you can download the .txt files and you are good to go!
-- Do not forget to open the tab while it does it job, otherwise your files in colab will be deleted!
+## Setup and Usage
+
+### Local Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/byigitt/transcriptor.git
+   cd transcriptor
+   ```
+2. Install dependencies:
+   ```bash
+   pip install whisper torch
+   chmod 755 youtube-dl
+   ```
+3. Download the Whisper model:
+   ```bash
+   python download.py
+   ```
+4. Create `youtube_urls.txt` with your YouTube URLs (one per line)
+5. Run the transcription:
+   ```bash
+   python main.py
+   ```
+
+### Google Colab Setup
+
+1. Create a new Colab notebook
+2. Change runtime type to GPU
+3. Clone the repository:
+   ```bash
+   !git clone https://github.com/byigitt/transcriptor.git
+   %cd transcriptor
+   ```
+4. Install dependencies and run:
+   ```bash
+   !chmod 755 youtube-dl
+   !pip install whisper torch
+   !python download.py
+   !python main.py
+   ```
+
+## Configuration
+
+The project uses `config.py` for centralized settings:
+
+- Model selection and device settings
+- Input/output paths configuration
+- YouTube download settings
+- Logging configuration
+
+## Output
+
+- Transcripts are saved in the `transcripts/` directory
+- Each transcript is named after its video with `-transcript.txt` suffix
+- Audio files are automatically cleaned up after transcription
+
+## Troubleshooting
+
+- If you encounter GPU-related errors, the system will automatically fall back to CPU
+- Check the logs for detailed error messages and debugging information
+- Make sure your YouTube URLs are valid and accessible
+- Keep the Colab tab open during processing to prevent file deletion
 
 ## For Issues and Questions
-Dont feel shy to ask your questions/problems in issues tab! You can also contribute the code in Pull requests tab.
+
+Feel free to:
+
+- Open an issue for bugs or questions
+- Submit pull requests for improvements
+- Check existing issues for common problems
+
+## Why Google Colab?
+
+Google Colab provides free GPU access and faster processing. The project works particularly well with Turkish language content (tested with Google Oyun ve Uygulama Akademisi education videos) but supports all languages supported by Whisper AI.
